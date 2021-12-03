@@ -5,19 +5,22 @@ public abstract class Empleado implements Comparable<Empleado>{
     private String nombre;
     private String apellido;
     private double salario;
+    private String email;
     private double numHorasTrabajadas;
     private int level;
 
-    public Empleado(int id, String nombre, String apellido, double salario) {
+    public Empleado(int id, String nombre, String apellido, String email, double salario) {
         this.id = id;
         this.nombre = nombre;
+        this.email = email;
         this.apellido = apellido;
         this.salario = salario;
     }
     
-    public Empleado(String nombre, String apellido, double salario) {
+    public Empleado(String nombre, String apellido, String email, double salario) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.email = email;
         this.salario = salario;
     }
 

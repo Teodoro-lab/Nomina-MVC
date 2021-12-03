@@ -4,6 +4,7 @@
  */
 package org.example.nominamvc.view;
 
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
@@ -238,33 +239,34 @@ public class NavegadorNominaView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(IdLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(MessageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(NombreLabel)
-                                .addComponent(ApellidoLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(SalarioLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldSalario, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MessageLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButtonAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSiguiente)))
+                                .addComponent(IdLabel)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(NombreLabel)
+                                    .addComponent(ApellidoLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SalarioLabel)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldSalario, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jButtonAnterior)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonNuevo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonEliminar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonModificar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonSiguiente))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -331,15 +333,15 @@ public class NavegadorNominaView extends javax.swing.JFrame {
         String apellido = jTextFieldApellido.getText();
         String salario = jTextFieldSalario.getText();
         
-        Administrador administrador = new Administrador(nombre, apellido, Double.parseDouble(salario));
-        new NominaDBCRUD().insertAdministrador(administrador); 
+        Administrador administrador = new Administrador(nombre, apellido,"", Double.parseDouble(salario));
+        new AdministradorController().insertAdministrador(administrador); 
         actualizarListaEmpleados();
         MessageLabel.setText("Nuevo Empleado creado");
     }//GEN-LAST:event_jButtonNuevoActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         String id = jTextFieldId.getText();
-        new NominaDBCRUD().deleteAdministrador(Integer.parseInt(id)); 
+        new AdministradorController().deleteAdministrador(Integer.parseInt(id)); 
         actualizarListaEmpleados();
         
         jTextFieldId.setText("");
@@ -360,6 +362,8 @@ public class NavegadorNominaView extends javax.swing.JFrame {
         String salario = jTextFieldSalario.getText();
         
         updateEmpleadoWindow.setVisible(rootPaneCheckingEnabled);
+        updateEmpleadoWindow.setSize(new Dimension(400, 300));
+        
         jTextFieldId1.setText(id);
         jTextFieldNombre1.setText(nombre);
         jTextFieldApellido1.setText(apellido);
@@ -376,8 +380,8 @@ public class NavegadorNominaView extends javax.swing.JFrame {
         String apellido = jTextFieldApellido1.getText();
         String salario = jTextFieldSalario1.getText();
         
-        Administrador administrador = new Administrador(Integer.parseInt(id), nombre, apellido, Double.parseDouble(salario));
-        new NominaDBCRUD().updateAdministrador(administrador); 
+        Administrador administrador = new Administrador(Integer.parseInt(id), nombre, apellido,"", Double.parseDouble(salario));
+        new AdministradorController().updateAdministrador(administrador); 
         actualizarListaEmpleados();
         MessageLabel.setText("Datos de Empleado actualizados");
         updateEmpleadoWindow.setVisible(false);

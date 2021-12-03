@@ -5,12 +5,12 @@ public class Administrador extends Empleado {
     private final static double porcentajeCompensacionMenor80Horas = .20;
     private int level = 1;
 
-     public Administrador(int id, String nombre, String apellido, double salario ) {
-        super(id, nombre, apellido, salario);
+     public Administrador(int id, String nombre, String apellido, String email, double salario ) {
+        super(id, nombre, apellido, email, salario);
     }
     
-    public Administrador(String nombre, String apellido, double salario) {
-        super(nombre, apellido, salario);
+    public Administrador(String nombre, String apellido, String email, double salario) {
+        super(nombre, apellido, email, salario);
     }
 
     @Override
